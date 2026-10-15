@@ -10,11 +10,17 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as EstudioRouteImport } from './routes/estudio'
 import { Route as ApiEditImageRouteImport } from './routes/api/edit-image'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EstudioRoute = EstudioRouteImport.update({
+  id: '/estudio',
+  path: '/estudio',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiEditImageRoute = ApiEditImageRouteImport.update({
@@ -25,27 +31,31 @@ const ApiEditImageRoute = ApiEditImageRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/estudio': typeof EstudioRoute
   '/api/edit-image': typeof ApiEditImageRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/estudio': typeof EstudioRoute
   '/api/edit-image': typeof ApiEditImageRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/estudio': typeof EstudioRoute
   '/api/edit-image': typeof ApiEditImageRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/api/edit-image'
+  fullPaths: '/' | '/estudio' | '/api/edit-image'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/api/edit-image'
-  id: '__root__' | '/' | '/api/edit-image'
+  to: '/' | '/estudio' | '/api/edit-image'
+  id: '__root__' | '/' | '/estudio' | '/api/edit-image'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  EstudioRoute: typeof EstudioRoute
   ApiEditImageRoute: typeof ApiEditImageRoute
 }
 
@@ -56,6 +66,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/estudio': {
+      id: '/estudio'
+      path: '/estudio'
+      fullPath: '/estudio'
+      preLoaderRoute: typeof EstudioRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/edit-image': {
@@ -70,6 +87,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  EstudioRoute: EstudioRoute,
   ApiEditImageRoute: ApiEditImageRoute,
 }
 export const routeTree = rootRouteImport
