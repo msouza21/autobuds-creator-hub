@@ -10,7 +10,12 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ColagensRouteImport } from './routes/colagens'
+import { Route as ConfiguracoesRouteImport } from './routes/configuracoes'
 import { Route as EstudioRouteImport } from './routes/estudio'
+import { Route as HistoricoRouteImport } from './routes/historico'
+import { Route as LegendasRouteImport } from './routes/legendas'
+import { Route as OfertasRouteImport } from './routes/ofertas'
 import { Route as ApiEditImageRouteImport } from './routes/api/edit-image'
 
 const IndexRoute = IndexRouteImport.update({
@@ -18,9 +23,34 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ColagensRoute = ColagensRouteImport.update({
+  id: '/colagens',
+  path: '/colagens',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConfiguracoesRoute = ConfiguracoesRouteImport.update({
+  id: '/configuracoes',
+  path: '/configuracoes',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EstudioRoute = EstudioRouteImport.update({
   id: '/estudio',
   path: '/estudio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HistoricoRoute = HistoricoRouteImport.update({
+  id: '/historico',
+  path: '/historico',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LegendasRoute = LegendasRouteImport.update({
+  id: '/legendas',
+  path: '/legendas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OfertasRoute = OfertasRouteImport.update({
+  id: '/ofertas',
+  path: '/ofertas',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiEditImageRoute = ApiEditImageRouteImport.update({
@@ -31,31 +61,76 @@ const ApiEditImageRoute = ApiEditImageRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/colagens': typeof ColagensRoute
+  '/configuracoes': typeof ConfiguracoesRoute
   '/estudio': typeof EstudioRoute
+  '/historico': typeof HistoricoRoute
+  '/legendas': typeof LegendasRoute
+  '/ofertas': typeof OfertasRoute
   '/api/edit-image': typeof ApiEditImageRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/colagens': typeof ColagensRoute
+  '/configuracoes': typeof ConfiguracoesRoute
   '/estudio': typeof EstudioRoute
+  '/historico': typeof HistoricoRoute
+  '/legendas': typeof LegendasRoute
+  '/ofertas': typeof OfertasRoute
   '/api/edit-image': typeof ApiEditImageRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/colagens': typeof ColagensRoute
+  '/configuracoes': typeof ConfiguracoesRoute
   '/estudio': typeof EstudioRoute
+  '/historico': typeof HistoricoRoute
+  '/legendas': typeof LegendasRoute
+  '/ofertas': typeof OfertasRoute
   '/api/edit-image': typeof ApiEditImageRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/estudio' | '/api/edit-image'
+  fullPaths:
+    | '/'
+    | '/colagens'
+    | '/configuracoes'
+    | '/estudio'
+    | '/historico'
+    | '/legendas'
+    | '/ofertas'
+    | '/api/edit-image'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/estudio' | '/api/edit-image'
-  id: '__root__' | '/' | '/estudio' | '/api/edit-image'
+  to:
+    | '/'
+    | '/colagens'
+    | '/configuracoes'
+    | '/estudio'
+    | '/historico'
+    | '/legendas'
+    | '/ofertas'
+    | '/api/edit-image'
+  id:
+    | '__root__'
+    | '/'
+    | '/colagens'
+    | '/configuracoes'
+    | '/estudio'
+    | '/historico'
+    | '/legendas'
+    | '/ofertas'
+    | '/api/edit-image'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ColagensRoute: typeof ColagensRoute
+  ConfiguracoesRoute: typeof ConfiguracoesRoute
   EstudioRoute: typeof EstudioRoute
+  HistoricoRoute: typeof HistoricoRoute
+  LegendasRoute: typeof LegendasRoute
+  OfertasRoute: typeof OfertasRoute
   ApiEditImageRoute: typeof ApiEditImageRoute
 }
 
@@ -68,11 +143,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/colagens': {
+      id: '/colagens'
+      path: '/colagens'
+      fullPath: '/colagens'
+      preLoaderRoute: typeof ColagensRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/configuracoes': {
+      id: '/configuracoes'
+      path: '/configuracoes'
+      fullPath: '/configuracoes'
+      preLoaderRoute: typeof ConfiguracoesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/estudio': {
       id: '/estudio'
       path: '/estudio'
       fullPath: '/estudio'
       preLoaderRoute: typeof EstudioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/historico': {
+      id: '/historico'
+      path: '/historico'
+      fullPath: '/historico'
+      preLoaderRoute: typeof HistoricoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/legendas': {
+      id: '/legendas'
+      path: '/legendas'
+      fullPath: '/legendas'
+      preLoaderRoute: typeof LegendasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ofertas': {
+      id: '/ofertas'
+      path: '/ofertas'
+      fullPath: '/ofertas'
+      preLoaderRoute: typeof OfertasRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/edit-image': {
@@ -87,7 +197,12 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ColagensRoute: ColagensRoute,
+  ConfiguracoesRoute: ConfiguracoesRoute,
   EstudioRoute: EstudioRoute,
+  HistoricoRoute: HistoricoRoute,
+  LegendasRoute: LegendasRoute,
+  OfertasRoute: OfertasRoute,
   ApiEditImageRoute: ApiEditImageRoute,
 }
 export const routeTree = rootRouteImport
