@@ -95,7 +95,7 @@ function Estudio() {
               hint="PNG ou JPG · saída Feed 1080 × 1350 ou Story 1080 × 1920"
               preview={source}
               onFiles={async ([f]) => {
-                setSource(await readFileAsDataUrl(f));
+                setSource(await readFileAsDataUrl(f!));
                 setResult(null);
               }}
             />
