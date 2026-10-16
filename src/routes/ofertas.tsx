@@ -137,7 +137,7 @@ function Ofertas() {
       <div className="grid gap-6 lg:grid-cols-[380px_1fr]">
         <div className="space-y-4">
           <Panel label="Foto do produto">
-            <ImageDrop title="Enviar foto da peça" hint="A peça é preservada — a IA cria apenas o cenário." preview={src} onFiles={async ([f]) => setSrc(await readFileAsDataUrl(f))} />
+            <ImageDrop title="Enviar foto da peça" hint="A peça é preservada — a IA cria apenas o cenário." preview={src} onFiles={async ([f]) => setSrc(await readFileAsDataUrl(f!))} />
           </Panel>
           <Panel label="Informações da oferta">
             <div><FieldLabel>Nome do produto (opcional)</FieldLabel><Input value={name} onChange={(e) => setName(e.target.value)} /></div>

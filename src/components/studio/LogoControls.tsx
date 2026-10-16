@@ -67,7 +67,7 @@ export function LogoControls({
             max={40}
             step={1}
             value={[Math.round(logo.w * 100)]}
-            onValueChange={([v]) => setSize("custom", v / 100)}
+            onValueChange={([v]) => setSize("custom", (v ?? 16) / 100)}
           />
         )}
       </div>

@@ -51,7 +51,7 @@ function Legendas() {
       <PageHeader title="Gerador de Legendas" subtitle="Envie a foto da peça e clique em gerar. A legenda sai pronta para copiar e colar no Instagram." />
       <div className="grid gap-6 lg:grid-cols-2">
         <Panel>
-          <ImageDrop title="Enviar foto da peça" hint="PNG ou JPG" preview={src} onFiles={async ([f]) => setSrc(await readFileAsDataUrl(f))} />
+          <ImageDrop title="Enviar foto da peça" hint="PNG ou JPG" preview={src} onFiles={async ([f]) => setSrc(await readFileAsDataUrl(f!))} />
           <Textarea placeholder="Observações opcionais (ex.: aplicação, marca, promoção)" value={notes} onChange={(e) => setNotes(e.target.value)} />
           <Button variant="hero" className="w-full" disabled={!src || busy} onClick={go}>
             {busy ? <Loader2 className="animate-spin" /> : <Sparkles />} {busy ? "Gerando…" : "Gerar legenda"}

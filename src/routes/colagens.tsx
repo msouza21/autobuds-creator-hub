@@ -55,7 +55,7 @@ function Colagens() {
   const canvas = useRef<HTMLCanvasElement>(null);
   const drag = useRef<{ i: number; sx: number; sy: number; c: Cell } | null>(null);
   const L = useLogo(W / H);
-  const rects = LAYOUTS[layout].cells;
+  const rects = LAYOUTS[layout]!.cells;
 
   useEffect(() => setCells(rects.map(() => ({ x: 0, y: 0, zoom: 1 }))), [layout]); // eslint-disable-line
 
@@ -95,7 +95,7 @@ function Colagens() {
     await drawLogo(ctx, L.logo);
     const url = c.toDataURL("image/jpeg", 0.92);
     downloadDataUrl(url, `afl-colagem-${Date.now()}.jpg`);
-    await addHistory({ kind: "colagem", title: `Colagem · ${LAYOUTS[layout].label}`, image: url });
+    await addHistory({ kind: "colagem", title: `Colagem · ${LAYOUTS[layout]!.label}`, image: url });
     toast.success("Colagem baixada e salva no histórico.");
   };
 
@@ -111,7 +111,7 @@ function Colagens() {
                 {photos.map((p, i) => (
                   <div key={i} className="group relative">
                     <img src={p.src} alt="" className={`aspect-square w-full rounded-lg object-cover ${i === 0 ? "ring-2 ring-primary" : ""}`} />
-                    <button title="Definir como principal" className="absolute left-1 top-1 rounded bg-background/80 p-0.5" onClick={() => setPhotos((ps) => [ps[i], ...ps.filter((_, j) => j !== i)])}>
+                    <button title="Definir como principal" className="absolute left-1 top-1 rounded bg-background/80 p-0.5" onClick={() => setPhotos((ps) => [ps[i]!, ...ps.filter((_, j) => j !== i)])}>
                       <Star className={`size-3 ${i === 0 ? "fill-primary text-primary" : ""}`} />
                     </button>
                     <button title="Remover" className="absolute right-1 top-1 rounded bg-background/80 p-0.5" onClick={() => setPhotos((ps) => ps.filter((_, j) => j !== i))}>
@@ -127,7 +127,7 @@ function Colagens() {
             </div>
             <div>
               <FieldLabel>Zoom do bloco {sel + 1}</FieldLabel>
-              <Slider min={100} max={250} value={[Math.round((cells[sel]?.zoom ?? 1) * 100)]} onValueChange={([v]) => setCells((cs) => cs.map((c, i) => (i === sel ? { ...c, zoom: v / 100 } : c)))} />
+              <Slider min={100} max={250} value={[Math.round((cells[sel]?.zoom ?? 1) * 100)]} onValueChange={([v]) => setCells((cs) => cs.map((c, i) => (i === sel ? { ...c, zoom: (v ?? 100) / 100 } : c)))} />
             </div>
             <label className="flex items-center justify-between text-sm">
               Melhorar fotos (exposição e contraste leves)
@@ -149,7 +149,7 @@ function Colagens() {
                   const i = cellAt(e);
                   if (i < 0) return;
                   setSel(i);
-                  drag.current = { i, sx: e.clientX, sy: e.clientY, c: cells[i] };
+                  drag.current = { i, sx: e.clientX, sy: e.clientY, c: cells[i] ?? { x: 0, y: 0, zoom: 1 } };
                   e.currentTarget.setPointerCapture(e.pointerId);
                 }}
                 onPointerMove={(e) => {

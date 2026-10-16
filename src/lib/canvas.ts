@@ -121,7 +121,7 @@ export async function cleanestCorner(src: string): Promise<Corner> {
     let sq = 0;
     const n = d.length / 4;
     for (let i = 0; i < d.length; i += 4) {
-      const l = 0.3 * d[i] + 0.59 * d[i + 1] + 0.11 * d[i + 2];
+      const l = 0.3 * d[i]! + 0.59 * d[i + 1]! + 0.11 * d[i + 2]!;
       sum += l;
       sq += l * l;
     }
